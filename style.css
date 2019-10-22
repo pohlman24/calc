@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   background: #EDF5E1;
+  font-family: sans-serif;
 }
 #container {
      position: absolute;
@@ -121,4 +122,5 @@
   grid-row-start: 3;
 }
 #div{grid-column-start: 4;
-grid-row-start: 2;}
+grid-row-start: 2;
+}
