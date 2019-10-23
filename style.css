@@ -47,6 +47,9 @@
   border-radius: 5px;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
 
 }
 #zero {
@@ -123,4 +126,8 @@
 }
 #div{grid-column-start: 4;
 grid-row-start: 2;
+}
+p{
+  background: #DFDCE5FF;
+  font-size: 5em;
 }
