@@ -21,25 +21,25 @@ function operate(a, operater, b) {
   console.log(a);
   console.log(b);
   console.log(operater);
-    if (operater == '+') {
-      console.log('test');
-      return add(a, b);
-    }else if (operater == '-') {
-      return minus(a ,b);
-    }else if (operater == 'x') {
-      return multiplication(a, b);
-    }else if (operater == '÷') {
-      return divide(a, b);
+  if (operater == '+') {
+    console.log('test');
+    return add(a, b);
+  }else if (operater == '-') {
+    return minus(a ,b);
+  }else if (operater == 'x') {
+    return multiplication(a, b);
+  }else if (operater == '÷') {
+    return divide(a, b);
   };
 }
 function display(number) {
-  return function(){
-    para.textContent = number
-    reactantOne = parseInt(number);
-  }
+  console.log('display test');
+  para.textContent = number;
 }
-function store() {
-
+function store(a) {
+  console.log('store test')
+  numbers.reactantOne = a;
+  return display(numbers.reactantOne);
 }
 /*
 so the display function needs to take a number entered and display but also store it as a varible to be used in the operate
@@ -50,7 +50,6 @@ instead of calling display when clicked i should call a new function that will s
 array, or object; then once you click enter it will use the array to call varibles for the operate function
 
 */
-
 const nine = document.querySelector('#nine');
 const eight = document.querySelector('#eight');
 const seven = document.querySelector('#seven');
@@ -73,19 +72,20 @@ const div = document.querySelector('#div');
 const equal = document.querySelector('#equal');
 result.appendChild(para)
 
-one.addEventListener('click', display('1'));
-two.addEventListener('click', display('2'));
-three.addEventListener('click', display('3'));
-four.addEventListener('click', display('4'));
-five.addEventListener('click', display('5'));
-six.addEventListener('click', display('6'));
-seven.addEventListener('click', display('7'));
-eight.addEventListener('click', display('8'));
-nine.addEventListener('click', display('9'));
-zero.addEventListener('click', display('0'));
-dot.addEventListener('click', display('.'));
-plus.addEventListener('click', display('+'));
-sub.addEventListener('click', display('-'));
-div.addEventListener('click', display('÷'));
-times.addEventListener('click', display('x'));
+//buttons
+one.addEventListener('click', () => {return store(1);})
+two.addEventListener('click', () => {return store('2');});
+three.addEventListener('click', () => {return store('3');});
+four.addEventListener('click', () => {return store('4');});
+five.addEventListener('click', () => {return store('5');});
+six.addEventListener('click', () => {return store('6');});
+seven.addEventListener('click', () => {return store('7');});
+eight.addEventListener('click', () => {return store('8');});
+nine.addEventListener('click', () => {return store('9');});
+zero.addEventListener('click', () => {return store('0');});
+dot.addEventListener('click', () => {return store('.');});
+plus.addEventListener('click', () => {return store('+');});
+sub.addEventListener('click', () => {return store('-');});
+div.addEventListener('click', () => {return store('÷');});
+times.addEventListener('click', () => {return store('x');});
 //equal.addEventListener('click', operate());
