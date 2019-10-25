@@ -3,6 +3,8 @@ okay how the fuck am i going to do this
 */
 let number1 = [];
 let number2 = [];
+let int1;
+let int2;
 let swap = false;
 
 function plus(a, b) {
@@ -19,8 +21,20 @@ function operate(a, operater, b) {
     return minus(a, b);
   }
 }
-function store(){
-
+function store(number){
+  if (swap == false && number != '+' && number != '-' && number != 'x' && number != '÷'){
+    number1.push(number);
+    int1 = number1.join('');
+    int1 = parseInt(int1);
+    //int1 = number1.map(function(x){ return parseInt(x)});
+    return(display(number));
+  }else if(swap == true && number != '+' && number != '-' && number != 'x' && number != '÷') {
+    number2.push(number);
+    return(display(number));
+  }else if (number == '+' || number == '-' || number == 'x' || number == '÷' && swap == false){
+    swap = true;
+    return(display(number));
+  }
 }
 
 function display(number) {
@@ -43,7 +57,7 @@ const dot = document.querySelector('#dot');
 const pow = document.querySelector('#power');
 const result = document.querySelector('#result');
 const para = document.createElement('p');
-const plus = document.querySelector('#add');
+const add = document.querySelector('#add');
 const sub = document.querySelector('#sub');
 const times = document.querySelector('#mult');
 const div = document.querySelector('#div');
@@ -51,7 +65,7 @@ const equal = document.querySelector('#equal');
 result.appendChild(para)
 
 //buttons
-one.addEventListener('click', () => {return store('1');})
+one.addEventListener('click', () => {return store(1);})
 two.addEventListener('click', () => {return store('2');});
 three.addEventListener('click', () => {return store('3');});
 four.addEventListener('click', () => {return store('4');});
@@ -62,10 +76,12 @@ eight.addEventListener('click', () => {return store('8');});
 nine.addEventListener('click', () => {return store('9');});
 zero.addEventListener('click', () => {return store('0');});
 dot.addEventListener('click', () => {return store('.');});
-plus.addEventListener('click', () => {return store('+');});
+add.addEventListener('click', () => {return store('+');});
 sub.addEventListener('click', () => {return store('-');});
 div.addEventListener('click', () => {return store('÷');});
 times.addEventListener('click', () => {return store('x');});
+equal.addEventListener('click', () => {return operate();});
+
 
 // okay so how do i get numbers into the number1 array and the other numbers into number2 after the operater button is pressed?
 // have input numbers go into ann array.
