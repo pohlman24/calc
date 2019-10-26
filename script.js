@@ -42,18 +42,18 @@ function store(number){
   if (swap == false && number != '+' && number != '-' && number != 'x' && number != '÷'){
     number1.push(number);
     int1 = number1.join('');
-    int1 = parseInt(int1);
-    return(display(int1));
+    int1 = parseFloat(int1);
+    return (display(int1));
   }else if(swap == true && number != '+' && number != '-' && number != 'x' && number != '÷') {
     number2.push(number);
     int2 = number2.join('');
-    int2 = parseInt(int2);
-    return(display(test + int2));
+    int2 = parseFloat(int2);
+    return (display(test + int2));
   }else if (number == '+' || number == '-' || number == 'x' || number == '÷' && swap == false){
     swap = true;
     op = number;
     test = int1 + ' ' + op + ' ';
-    return(display(test));
+    return (display(test));
   }else if (number == '+' || number == '-' || number == 'x' || number == '÷' && swap == true){
     swap = false;
     op = number;
@@ -66,6 +66,11 @@ function display(number) {
   para.textContent = number;
 }
 
+function Clear() {
+  number1  = [];
+  number2 = [];
+  para.textContent = ''
+}
 
 const nine = document.querySelector('#nine');
 const eight = document.querySelector('#eight');
@@ -106,6 +111,7 @@ sub.addEventListener('click', () => {return store('-');});
 div.addEventListener('click', () => {return store('÷');});
 mult.addEventListener('click', () => {return store('x');});
 equal.addEventListener('click', () => {return operate(int1,op,int2);});
+clear.addEventListener('click', () => {return Clear();});
 
 
 // okay so how do i get numbers into the number1 array and the other numbers into number2 after the operater button is pressed?
