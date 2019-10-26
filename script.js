@@ -1,11 +1,13 @@
 /*
-okay how the fuck am i going to do this
+okay how the fuck am i going to do this;
 */
 let number1 = [];
 let number2 = [];
 let int1;
 let int2;
 let swap = false;
+let op;
+let test;
 
 function plus(a, b) {
   return a + b;
@@ -13,26 +15,49 @@ function plus(a, b) {
 function minus(a, b) {
   return a - b;
 }
+function  times(a, b) {
+  return a * b;
+}
+function divided(a, b) {
+  return a / b;
+}
 
 function operate(a, operater, b) {
   if (operater == '+') {
-    return plus(a, b);
+    let answer = plus(a, b);
+    return(display(answer))
   }else if (operater == '-') {
-    return minus(a, b);
+    let answer = minus(a, b);
+    return(display(answer))
+  }else if (operater == 'x') {
+    let answer = times(a, b);
+    return(display(answer))
+  }else if (operater == '÷') {
+    let answer = divided(a, b);
+    return(display(answer))
   }
 }
+
 function store(number){
   if (swap == false && number != '+' && number != '-' && number != 'x' && number != '÷'){
     number1.push(number);
     int1 = number1.join('');
     int1 = parseInt(int1);
-    //int1 = number1.map(function(x){ return parseInt(x)});
-    return(display(number));
+    return(display(int1));
   }else if(swap == true && number != '+' && number != '-' && number != 'x' && number != '÷') {
     number2.push(number);
-    return(display(number));
+    int2 = number2.join('');
+    int2 = parseInt(int2);
+    return(display(test + int2));
   }else if (number == '+' || number == '-' || number == 'x' || number == '÷' && swap == false){
     swap = true;
+    op = number;
+    test = int1 + ' ' + op + ' ';
+    return(display(test));
+  }else if (number == '+' || number == '-' || number == 'x' || number == '÷' && swap == true){
+    swap = false;
+    op = number;
+    test = int1 + ' ' + op + ' ';
     return(display(number));
   }
 }
@@ -59,13 +84,13 @@ const result = document.querySelector('#result');
 const para = document.createElement('p');
 const add = document.querySelector('#add');
 const sub = document.querySelector('#sub');
-const times = document.querySelector('#mult');
+const mult = document.querySelector('#mult');
 const div = document.querySelector('#div');
 const equal = document.querySelector('#equal');
 result.appendChild(para)
 
 //buttons
-one.addEventListener('click', () => {return store(1);})
+one.addEventListener('click', () => {return store('1');})
 two.addEventListener('click', () => {return store('2');});
 three.addEventListener('click', () => {return store('3');});
 four.addEventListener('click', () => {return store('4');});
@@ -79,8 +104,8 @@ dot.addEventListener('click', () => {return store('.');});
 add.addEventListener('click', () => {return store('+');});
 sub.addEventListener('click', () => {return store('-');});
 div.addEventListener('click', () => {return store('÷');});
-times.addEventListener('click', () => {return store('x');});
-equal.addEventListener('click', () => {return operate();});
+mult.addEventListener('click', () => {return store('x');});
+equal.addEventListener('click', () => {return operate(int1,op,int2);});
 
 
 // okay so how do i get numbers into the number1 array and the other numbers into number2 after the operater button is pressed?
