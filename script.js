@@ -28,31 +28,35 @@ function divided(a, b) {
 function operate(a, operater, b) {
   if (operater == '+') {
     answer[i] = plus(a, b);
+    int1 = answer[i];
+    return(display(answer[i]));
     i++;
-    return(display(answer))
   }else if (operater == '-') {
     answer[i] = minus(a, b);
-    i ++;
-    return(display(answer))
+    int1 = answer[i];
+    return(display(answer[i]));
+    i++;
   }else if (operater == 'x') {
     answer[i] = times(a, b);
+    int1 = answer[i];
+    return(display(answer[i]));
     i++;
-    return(display(answer))
   }else if (operater == '÷') {
     answer[i] = divided(a, b);
+    int1 = answer[i];
+    return(display(answer[i]));
     i++;
-    return(display(answer))
   }
 }
 
 function store(number){
   if (swap == false && number != '+' && number != '-' && number != 'x' && number != '÷'){
     number1.push(number);
+    if(answer.length >= 1){
+      number1 = answer[i];
+    }
     int1 = number1.join('');
     int1 = parseFloat(int1);
-    if(answer.length >= 1){
-      int1 = answer[i];
-    }
     return (display(int1));
   }else if(swap == true && number != '+' && number != '-' && number != 'x' && number != '÷') {
     if(answer.length >= 1){
@@ -75,14 +79,19 @@ function store(number){
   }
 }
 
-function display(number) {
-  para.textContent = number;
-}
-
 function Clear() {
   number1  = [];
   number2 = [];
+  answer = [];
+  int1 = [];
+  int2 = [];
+  i = 0;
+  swap = false;
   para.textContent = ''
+}
+
+function display(number) {
+  para.textContent = number;
 }
 
 const nine = document.querySelector('#nine');
@@ -141,3 +150,6 @@ clear.addEventListener('click', () => {return Clear();});
 //when you want to do another operator to it, it will take the array[i] and then plug that into the operater function
 //then that new answer will be stored in as array[1] and repeat.
 //each time you get a new answer i goes up.
+
+// now for some reason when you type in a problem, then clear it, then try to enter a new one,
+//it displays "old answer + new number"
