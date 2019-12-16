@@ -30,38 +30,49 @@ function divided(a, b) {
 function operate(a, operater, b) {
   if (operater == '+') {
     answer[i] = plus(a, b);
-    in1 = answer[i];
+    int1 = answer[i];
     int2 = [];
     blah = answer[i];
     i++;
     z++;
     return(display(blah));
   }else if (operater == '-') {
-    i++;
     answer[i] = minus(a, b);
     int1 = answer[i];
-    return(display(answer[i]));
-  }else if (operater == 'x') {
+    int2 = [];
+    blah = answer[i];
     i++;
+    z++;
+    return(display(blah));
+  }else if (operater == 'x') {
     answer[i] = times(a, b);
     int1 = answer[i];
-    return(display(answer[i]));
-  }else if (operater == '÷') {
+    int2 = [];
+    blah = answer[i];
     i++;
+    z++;
+    return(display(blah));
+  }else if (operater == '÷') {
     answer[i] = divided(a, b);
     int1 = answer[i];
-    return(display(answer[i]));
+    int2 = [];
+    blah = answer[i];
+    i++;
+    z++;
+    return(display(blah));
   }
 }
 
 function store(number){
   if (swap == false && number != '+' && number != '-' && number != 'x' && number != '÷'){ // if input is a number
-    number1.push(number); // add inputed numbers to array
-    int1 = number1.join(''); // combine numbers into one string
+    console.log('swap is ' + swap);
+    number1.push(number); // add inputed number into number1 array
+    int1 = number1.join(''); // combine numbers from number1 array into one string
     int1 = parseFloat(int1); // turn string into a float
     return (display(int1)); // display number on Calculator
   }else if (swap == false && number == '+' || number == '-' || number == 'x' || number == '÷' || number == '='){ // if input is anything but a number
     swap = true;
+    console.log('swap was false and now is ' + swap)
     if(answer.length >= 1){ // if you have aleady entered a problem and want to operate on the answer
       int1 = answer[z];
       number2 = [];
@@ -72,6 +83,7 @@ function store(number){
     return (display(test)); // displays the first number and operater
   }else if (swap == true && number == '+' || number == '-' || number == 'x' || number == '÷' || number == '='){ // repeat of above but different swap value
     swap = false;
+    console.log('swap was true and is now ' + swap)
     if(answer.length >= 1){ // if you have aleady entered a problem and want to operate on the answer
       int1 = answer[z];
       number2 = [];
@@ -81,6 +93,7 @@ function store(number){
     test = int1 + ' ' + op + ' ';
     return(display(test));
   }else if(swap == true && number != '+' && number != '-' && number != 'x' && number != '÷') { // if input is a number and entered after operator
+    console.log('swap is ' + swap);
     number2.push(number); // adds the inputted number to array
     int2 = number2.join(''); // combines array into one string and stores as a new varible
     int2 = parseFloat(int2); // turns string into a float
@@ -148,21 +161,17 @@ clear.addEventListener('click', () => {return Clear();});
 
 /*
 
-new problem: you cant have multiple operation symbols, because of having it set up that whenever you click it opertation
-symbol it switches a switch to true or flase, so trying to have more than one just overwrites one of the two arrays.
-need to some how auto generate a array whenever the operation button is presses
-but then wont that mess up my operate function because that can only take 2 numbers and 1 operater?
-or do i make it so that it will run the operate function on the first set of numbers, then store that value into a varible
-then use that varible answer as a argument for operate function.. so basically the same way that imn solving the issue
-of doing a math problem and then just adding another number on top of that answer.
+Problem: cant do consectuive operaters
+  example: 1 + 1 + 1 will not work; results in in 11 + 1
 
-to auto generate the array whenever an operation button is entered, i need to make num_of_op = 0,
-for each num_of_op i need to make a new array, and store then new input number in side it.
-then use that to get an answer but dont display it, just use it to get the final answer.
+  i think this is because you flip the switch when you enter a OP and their are only 2 options for the switch: True or false
+so when you try to do a 2nd OP it will change add the new numbers omto the first number
+  --so how do i have the inputed nubers go into one varible and have the computer know that whenever a OP is seleceted to store all the new inputed numbers into
+-- another vaible, and more numbers into another varble
+++++++ so when you click a number it will create an array. each number you click will go inside that array and then the arrya will all be combined into a float
+++++++ and that float into a usable varible; then once you click and OP   
 
-okay so what i do this, when ever the store function is called it will increase the value of num_of_op and also
-create an array. let array + toString(num_of_op) = (number);
 
-new problem: whne you do a math problem and then try to add a number to the answer it only accepts single digit numbers
- if do 1 + 2 = 3------- int1 should be
+i need to make it so that equl button also changes the switch key .
+
 */

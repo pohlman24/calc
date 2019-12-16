@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  background: #EDF5E1;
+  background: #DFDCE5FF;
   font-family: sans-serif;
 }
 #container {
@@ -26,7 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #606060FF;
+  background: #A2A2A1FF; /* silver */
   border: 1px solid black;
 
 }
@@ -35,7 +35,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #FEE715FF;
+  background: #195190FF; /* blue */
   border: 1px solid black;
 
 }
