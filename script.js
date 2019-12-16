@@ -15,16 +15,16 @@ let blah;
 
 
 function plus(a, b) {
-  return a + b;
+  return (a + b).toFixed(8);
 }
 function minus(a, b) {
-  return a - b;
+  return (a - b).toFixed(8);
 }
 function times(a, b) {
-  return a * b;
+  return (a * b).toFixed(8);
 }
 function divided(a, b) {
-  return a / b;
+  return (a / b).toFixed(8);
 }
 
 function operate(a, operater, b) {
@@ -169,7 +169,7 @@ so when you try to do a 2nd OP it will change add the new numbers omto the first
   --so how do i have the inputed nubers go into one varible and have the computer know that whenever a OP is seleceted to store all the new inputed numbers into
 -- another vaible, and more numbers into another varble
 ++++++ so when you click a number it will create an array. each number you click will go inside that array and then the arrya will all be combined into a float
-++++++ and that float into a usable varible; then once you click and OP   
+++++++ and that float into a usable varible; then once you click and OP
 
 
 i need to make it so that equl button also changes the switch key .
