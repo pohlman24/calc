@@ -12,11 +12,14 @@ let i = 0;
 let z = -1;
 let array;
 let blah;
+let decimal;
+let fakeString = '2 4 + 1 7'
 
 
-function plus(a, b) {
-  return (a + b).toFixed(8);
+let plusMath = function plus(a, b) {
+  return (a + b);
 }
+
 function minus(a, b) {
   return (a - b).toFixed(8);
 }
@@ -29,12 +32,13 @@ function divided(a, b) {
 
 function operate(a, operater, b) {
   if (operater == '+') {
-    answer[i] = plus(a, b);
+    answer[i] = plusMath(a, b);
     int1 = answer[i];
     int2 = [];
     blah = answer[i];
     i++;
     z++;
+    console.log(plusMath.toString().split('.')[1]);
     return(display(blah));
   }else if (operater == '-') {
     answer[i] = minus(a, b);
@@ -65,14 +69,19 @@ function operate(a, operater, b) {
 
 function store(number){
   if (swap == false && number != '+' && number != '-' && number != 'x' && number != '÷'){ // if input is a number
-    console.log('swap is ' + swap);
+    //console.log('swap is ' + swap);
     number1.push(number); // add inputed number into number1 array
     int1 = number1.join(''); // combine numbers from number1 array into one string
     int1 = parseFloat(int1); // turn string into a float
-    return (display(int1)); // display number on Calculator
+    if (number == '.'){
+      return (display(int1 + '.'));
+    }else {
+      return (display(int1)); // display number on Calculator
+  }
+
   }else if (swap == false && number == '+' || number == '-' || number == 'x' || number == '÷' || number == '='){ // if input is anything but a number
     swap = true;
-    console.log('swap was false and now is ' + swap)
+    //console.log('swap was false and now is ' + swap)
     if(answer.length >= 1){ // if you have aleady entered a problem and want to operate on the answer
       int1 = answer[z];
       number2 = [];
@@ -81,9 +90,21 @@ function store(number){
     op = number; // idk why but i need to store the number input as a varible in order to call it later
     test = int1 + ' ' + op + ' '; // store the imput number and operater as varible to display it
     return (display(test)); // displays the first number and operater
+
+  }else if(swap == true && number != '+' && number != '-' && number != 'x' && number != '÷') { // if input is a number and entered after operator
+    console.log('swap is ' + swap);
+    number2.push(number); // adds the inputted number to array
+    int2 = number2.join(''); // combines array into one string and stores as a new varible
+    int2 = parseFloat(int2); // turns string into a float
+    if (number == '.'){
+      return (display(test + int2 + '.'));
+    }else{
+      return (display(test + int2)); // displays the previous inputed number and operator,test, and the new inputed number
+  }
+
   }else if (swap == true && number == '+' || number == '-' || number == 'x' || number == '÷' || number == '='){ // repeat of above but different swap value
     swap = false;
-    console.log('swap was true and is now ' + swap)
+    //console.log('swap was true and is now ' + swap)
     if(answer.length >= 1){ // if you have aleady entered a problem and want to operate on the answer
       int1 = answer[z];
       number2 = [];
@@ -92,12 +113,6 @@ function store(number){
     op = number;
     test = int1 + ' ' + op + ' ';
     return(display(test));
-  }else if(swap == true && number != '+' && number != '-' && number != 'x' && number != '÷') { // if input is a number and entered after operator
-    console.log('swap is ' + swap);
-    number2.push(number); // adds the inputted number to array
-    int2 = number2.join(''); // combines array into one string and stores as a new varible
-    int2 = parseFloat(int2); // turns string into a float
-    return (display(test + int2)); // displays the previous inputed number and operator,test, and the new inputed number
   }
 }
 
@@ -114,7 +129,7 @@ function Clear() { // will reset the Calculator
   para.textContent = ''
 }
 
-function display(number) { // displays the
+function display(number) { // displays the numbers
   para.textContent = number;
 }
 
@@ -172,6 +187,16 @@ so when you try to do a 2nd OP it will change add the new numbers omto the first
 ++++++ and that float into a usable varible; then once you click and OP
 
 
-i need to make it so that equl button also changes the switch key .
++++++++ i need to make it so that equl button also changes the switch key .
+
+
+okay so i have the inputed numbers and OP going to an array and then do the .join(' ') function to turn all that into one string. then do the .split()
+but my issue is the seperator
+
+
+
+
+
+
 
 */
