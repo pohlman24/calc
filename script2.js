@@ -1,66 +1,46 @@
-//okay how the fuck am i going to do this;
-/*let number1 = [];
-let number2 = [];
-let answer = []; */
 let bigArray = [];
+let answer;
 let int1;
 let int2;
 let swap = false;
 let op;
 let equation;
-let i = 0;
-let z = -1;
 let decimal;
 let fakeString = [] // this is just for my testing
 
 
-let plusMath = function plus(a, b) {
-  return (a + b);
+function plus(num1, num2) {
+  return(num1 + num2);
 }
 
-function minus(a, b) {
-  return (a - b);
+function minus(num1, num2) {
+  return (num1 - num2);
 }
-function times(a, b) {
-  return (a * b);
+function times(num1, num2) {
+  return (num1 * num2);
 }
-function divided(a, b) {
-  return (a / b);
+function divided(num1, num2) {
+  return (num1 / num2);
 }
 
-function operate(a, operater, b) {
+function operate(num1, operater, num2) {
   if (operater == '+') {
-    answer[i] = plusMath(a, b);
-    int1 = answer[i];
-    int2 = [];
-    i++;
-    z++;
-    return(display(int1));
+    answer = plus(num1, num2);
+    bigArray = []
+    return(display(answer));
   }else if (operater == '-') {
-    answer[i] = minus(a, b);
-    int1 = answer[i];
-    int2 = [];
-    i++;
-    z++;
-    return(display(int1));
+    answer = minus(num1, num2);
+    return(display(answer));
   }else if (operater == 'x') {
-    answer[i] = times(a, b);
-    int1 = answer[i];
-    int2 = [];
-    i++;
-    z++;
-    return(display(int1));
+    answer = times(num1, num2);
+    return(display(answer));
   }else if (operater == '÷') {
-    answer[i] = divided(a, b);
-    int1 = answer[i];
-    int2 = [];
-    i++;
-    z++;
-    return(display(int1));
+    answer = divided(num1, num2);
+    return(display(answer));
   }
 }
 
-function store(number){
+/*function store(number){
   if (swap == false && number != '+' && number != '-' && number != 'x' && number != '÷'){ // if input is a number
     //console.log('swap is ' + swap);
     number1.push(number);
@@ -107,17 +87,36 @@ function store(number){
     equation = int1 + ' ' + op + ' ';
     return(display(equation));
   }
+} */
+function store(inputedNumber) {
+  if(typeof answer !== 'undefined'){ // if adding to an answer
+    bigArray[0] = answer;
+    bigArray.push(inputedNumber);
+    int1 = bigArray.join('');
+    int1 = int1.split('+');
+    if (inputedNumber == '+'){ // just for display
+      return(display(answer + ' +'))
+    }else {
+    return (display(answer + ' + ' + int1[1]))
+    }
+  }else{
+  bigArray.push(inputedNumber);
+  int1 = bigArray.join('');
+  int1 = int1.split('+');
+  if (inputedNumber == '+'){
+    op = inputedNumber;
+    return(display(int1[0] + ' + '))
+  }
+  if (int1.length >= 2){
+    return(display(int1[0] + ' + ' + int1[1]))
+  }
+  return (display(int1));
+  }
 }
 
 function Clear() { // will reset the Calculator
-  number1  = [];
-  number2 = [];
-  answer = [];
-  int1 = [];
-  int2 = [];
-  i = 0;
-  z = -1;
-  swap = false;
+  bigArray = [];
+  int1 = []
   para.textContent = ''
 }
 
@@ -148,7 +147,7 @@ const equal = document.querySelector('#equal');
 result.appendChild(para);
 
 //buttons
-one.addEventListener('click', () => {return store('1');})
+one.addEventListener('click', () => {return store('1');});
 two.addEventListener('click', () => {return store('2');});
 three.addEventListener('click', () => {return store('3');});
 four.addEventListener('click', () => {return store('4');});
@@ -163,26 +162,9 @@ add.addEventListener('click', () => {return store('+');});
 sub.addEventListener('click', () => {return store('-');});
 div.addEventListener('click', () => {return store('÷');});
 mult.addEventListener('click', () => {return store('x');});
-equal.addEventListener('click', () => {return operate(int1,op,int2);});
+equal.addEventListener('click', () => {return operate((parseFloat(int1[0])),op,(parseFloat(int1[1])))});
 clear.addEventListener('click', () => {return Clear();});
 /*
-
-Problem: cant do consectuive operaters
-  example: 1 + 1 + 1 will not work; results in in 11 + 1
-
-  i think this is because you flip the switch when you enter a OP and their are only 2 options for the switch: True or false
-so when you try to do a 2nd OP it will change add the new numbers omto the first number
-  --so how do i have the inputed nubers go into one varible and have the computer know that whenever a OP is seleceted to store all the new inputed numbers into
--- another vaible, and more numbers into another varble
-++++++ so when you click a number it will create an array. each number you click will go inside that array and then the arrya will all be combined into a float
-++++++ and that float into a usable varible; then once you click and OP
-
-+++++++ i need to make it so that equl button also changes the switch key .
-
-okay so i have the inputed numbers and OP going to an array and then do the .join(' ') function to turn all that into one string. then do the .split()
-but my issue is the seperator
-
-}
 ----------------------------------------------------------------------------------------
 let players = [
   {name: 'Alex', initiative: 20,},
