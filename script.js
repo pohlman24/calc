@@ -1,112 +1,162 @@
-//okay how the fuck am i going to do this;
-/*let number1 = [];
-let number2 = [];
-let answer = []; */
-let bigArray = [];
-let int1;
-let int2;
+let number1 = [], number2 = [];
+let int1, int2;
+let answer = []; 
 let swap = false;
 let op;
-let equation;
 let i = 0;
-let z = -1;
-let decimal;
-let fakeString = [] // this is just for my testing
-
+let test = [];
+let wholeEquation;
+let num_of_decimals = 0, nums_of_negatives = 0;
 
 let plusMath = function plus(a, b) {
-  return (a + b);
+  return (a +b).toFixed(2)
 }
-
 function minus(a, b) {
-  return (a - b);
+  return (a - b).toFixed(2);
 }
 function times(a, b) {
-  return (a * b);
+  return (a * b).toFixed(2);
 }
 function divided(a, b) {
-  return (a / b);
+  if (b == 0){
+    return("Infinity")
+  }
+  return (a / b).toFixed(2);
 }
 
 function operate(a, operater, b) {
   if (operater == '+') {
     answer[i] = plusMath(a, b);
+    number1 = answer[i];
     int1 = answer[i];
-    int2 = [];
+    number2 = [];
+    int2 = 0;
     i++;
-    z++;
-    return(display(int1));
+    swap = false
+    return(display(number1));
   }else if (operater == '-') {
     answer[i] = minus(a, b);
-    int1 = answer[i];
-    int2 = [];
+    number1 = answer[i];
+    int1 = answer[i]
+    int2 = 0
+    number2 = [];
     i++;
-    z++;
-    return(display(int1));
+    swap = false
+    return(display(number1));
   }else if (operater == 'x') {
     answer[i] = times(a, b);
+    number1 = answer[i];
     int1 = answer[i];
-    int2 = [];
+    number2 = [];
+    int2 = 0;
     i++;
-    z++;
-    return(display(int1));
+    swap = false
+    return(display(number1));
   }else if (operater == '÷') {
     answer[i] = divided(a, b);
+    number1 = answer[i];
     int1 = answer[i];
-    int2 = [];
+    number2 = [];
+    int2 = 0;
     i++;
-    z++;
-    return(display(int1));
+    swap = false
+    return(display(number1));
   }
 }
 
-function store(number){
-  if (swap == false && number != '+' && number != '-' && number != 'x' && number != '÷'){ // if input is a number
-    //console.log('swap is ' + swap);
+function storeNumber(number){
+  add.style.backgroundColor = '#195190FF'
+  sub.style.backgroundColor = '#195190FF'
+  div.style.backgroundColor = '#195190FF'
+  mult.style.backgroundColor = '#195190FF'
+
+
+  if (swap == false){
     number1.push(number);
     int1 = number1.join('');
     int1 = parseFloat(int1);
-    if (number == '.'){
-      return (display(int1 + '.'));
-    }else {
-      return (display(int1));
-  }
 
-  }else if (swap == false && number == '+' || number == '-' || number == 'x' || number == '÷' || number == '='){ // if input is anything but a number
-    swap = true;
-    //console.log('swap was false and now is ' + swap)
-    if(answer.length >= 1){ // if you have aleady entered a problem and want to operate on the answer
-      int1 = answer[z];
-      number2 = [];
-      swap = true;
+    if (number == '-'){
+      nums_of_negatives++;
+      if (nums_of_negatives >= 2){
+        // checks if there are already a negative
+        console.log('multiple negarives check') 
+        number1.pop();
+        return 0;
+      }
+      else if (number == '-'){
+        // if user enters negative button then display the negative symbol
+        display(number1[0] + '0');
+      }
     }
-    op = number; // idk why but i need to store the number input as a varible in order to call it later
-    equation  = int1 + ' ' + op + ' '; //
-    return (display(equation));
 
-  }else if(swap == true && number != '+' && number != '-' && number != 'x' && number != '÷') { // if input is a number and entered after operator
-    //console.log('swap is ' + swap);
+    else if (number == '.'){
+      num_of_decimals++;
+      if (num_of_decimals >= 2){
+        // if there is already a decimal in the equation
+        console.log('multiple deciamls in equation');
+        number1.pop()
+        return 0;
+      }
+      else if (number1.length <= 1){
+        // if user enters a decimal before a number
+        display('0.');
+      }
+      else {
+        // displays correct decimal
+        console.log('working decimal')
+        display(int1 + '.');
+      }
+    }
+    else{
+      console.log('display number test')
+      display(int1)
+      wholeEquation = int1
+    }
+
+  } else if(swap == true){
     number2.push(number);
     int2 = number2.join('');
-    int2 = parseFloat(int2);
-    if (number == '.'){
-      return (display(equation + int2 + '.'));
-    }else{
-      return (display(equation + int2));
-  }
-
-  }else if (swap == true && number == '+' || number == '-' || number == 'x' || number == '÷' || number == '='){ // repeat of above but different swap value
-    swap = false;
-    //console.log('swap was true and is now ' + swap)
-    if(answer.length >= 1){
-      int1 = answer[z];
-      number2 = [];
-      swap = true;
+    int2 = parseFloat(int2)
+    if (number == '-' && number2.length > 1) {
+      int2 = negativeOperator(int2);
+      display(int2)
     }
-    op = number;
-    equation = int1 + ' ' + op + ' ';
-    return(display(equation));
+    else if (number == '-') {
+      display(number2[0]);
+    }
+    else if (number == '.'){
+      display(int2 + '.');
+    }
+    else{
+      display(int2)
+      wholeEquation += int2
+    }
   }
+}
+
+function addOperator(operator){
+  swap = true;
+  add.style.backgroundColor = '#b5d8ff';
+  op = operator; 
+  test.push(operator);
+  wholeEquation += test
+}
+
+function minusOperator(operator) {
+  swap = true;
+  sub.style.backgroundColor = '#b5d8ff';
+  op = operator; 
+}
+function divideOperator(operator) {
+  swap = true;
+  div.style.backgroundColor = '#b5d8ff';
+  op = operator; 
+}
+function multiplyOperator(operator) {
+  swap = true;
+  mult.style.backgroundColor = '#b5d8ff';
+  op = operator; 
 }
 
 function Clear() { // will reset the Calculator
@@ -116,9 +166,8 @@ function Clear() { // will reset the Calculator
   int1 = [];
   int2 = [];
   i = 0;
-  z = -1;
   swap = false;
-  para.textContent = ''
+  para.textContent = '0';
 }
 
 function display(number) { // displays the numbers
@@ -140,6 +189,7 @@ const dot = document.querySelector('#dot');
 const pow = document.querySelector('#power');
 const result = document.querySelector('#result');
 const para = document.createElement('p');
+para.textContent = '0'
 const add = document.querySelector('#add');
 const sub = document.querySelector('#sub');
 const mult = document.querySelector('#mult');
@@ -147,53 +197,51 @@ const div = document.querySelector('#div');
 const equal = document.querySelector('#equal');
 result.appendChild(para);
 
-//buttons
-one.addEventListener('click', () => {return store('1');})
-two.addEventListener('click', () => {return store('2');});
-three.addEventListener('click', () => {return store('3');});
-four.addEventListener('click', () => {return store('4');});
-five.addEventListener('click', () => {return store('5');});
-six.addEventListener('click', () => {return store('6');});
-seven.addEventListener('click', () => {return store('7');});
-eight.addEventListener('click', () => {return store('8');});
-nine.addEventListener('click', () => {return store('9');});
-zero.addEventListener('click', () => {return store('0');});
-dot.addEventListener('click', () => {return store('.');});
-add.addEventListener('click', () => {return store('+');});
-sub.addEventListener('click', () => {return store('-');});
-div.addEventListener('click', () => {return store('÷');});
-mult.addEventListener('click', () => {return store('x');});
-equal.addEventListener('click', () => {return operate(int1,op,int2);});
+// buttons
+one.addEventListener('click', () => {return storeNumber('1');})
+two.addEventListener('click', () => {return storeNumber('2');});
+three.addEventListener('click', () => {return storeNumber('3');});
+four.addEventListener('click', () => {return storeNumber('4');});
+five.addEventListener('click', () => {return storeNumber('5');});
+six.addEventListener('click', () => {return storeNumber('6');});
+seven.addEventListener('click', () => {return storeNumber('7');});
+eight.addEventListener('click', () => {return storeNumber('8');});
+nine.addEventListener('click', () => {return storeNumber('9');});
+zero.addEventListener('click', () => {return storeNumber('0');});
+dot.addEventListener('click', () => {return storeNumber('.');});
+neg.addEventListener('click', () => { return storeNumber('-');});
+
+add.addEventListener('click', () => {return addOperator('+');});
+sub.addEventListener('click', () => { return minusOperator('-');});
+div.addEventListener('click', () => { return divideOperator('÷');});
+mult.addEventListener('click', () => { return multiplyOperator('x');});
+pow.addEventListener('click', () => { return });
+
+
+equal.addEventListener('click', () => { return operate(int1, op, int2);});
 clear.addEventListener('click', () => {return Clear();});
+
+
+
 /*
+  test_array = 2+5x1
+  maybe try to filter the array to get each operation type:
+  indexOfPlus = test_array.indexOf('+')
+  let a  = test_array[indexOfPlus-1]
+  let b = test_array[indexOfPlus+1]
+  plus(a,b)
+  test_array.indexOf() for '-'
+  test_array.indexOf() for 'X'
+  test_array.indexOf() for '/'
 
-Problem: cant do consectuive operaters
-  example: 1 + 1 + 1 will not work; results in in 11 + 1
 
-  i think this is because you flip the switch when you enter a OP and their are only 2 options for the switch: True or false
-so when you try to do a 2nd OP it will change add the new numbers omto the first number
-  --so how do i have the inputed nubers go into one varible and have the computer know that whenever a OP is seleceted to store all the new inputed numbers into
--- another vaible, and more numbers into another varble
-++++++ so when you click a number it will create an array. each number you click will go inside that array and then the arrya will all be combined into a float
-++++++ and that float into a usable varible; then once you click and OP
+*/
 
-+++++++ i need to make it so that equl button also changes the switch key .
+/*
+problem 1: can enter multple negatives 
+*/
 
-okay so i have the inputed numbers and OP going to an array and then do the .join(' ') function to turn all that into one string. then do the .split()
-but my issue is the seperator
+/*
+qualit of life chagne: add a AC clear button 
 
-}
-----------------------------------------------------------------------------------------
-let players = [
-  {name: 'Alex', initiative: 20,},
-  {name: 'Jake', initiative: 8,},
-  {name: 'Taylor', initiative: 16,},
-];
-players.sort(function (a, b) {
-  return b.initiative - a.initiative;
-});
-for (i = 0; i< players.length; i++) {
-  console.log(players[i].name +  ' rolled a ' + players[i].initiative);
-}
-console.log(players[0].name + ' is going first')
 */
