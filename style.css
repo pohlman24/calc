@@ -3,6 +3,7 @@
   padding: 0;
   background: #DFDCE5FF;
   font-family: sans-serif;
+  cursor: default;
 }
 #container {
      position: absolute;

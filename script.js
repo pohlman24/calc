@@ -1,7 +1,7 @@
 let number1 = [], number2 = [];
 let int1, int2;
 let answer = []; 
-let swap = false;
+let swap = false, clearSwap = false;
 let op;
 let i = 0;
 let test = [];
@@ -9,7 +9,9 @@ let wholeEquation;
 let num_of_decimals = 0, nums_of_negatives = 0;
 
 let plusMath = function plus(a, b) {
-  return (a +b).toFixed(2)
+  a = parseInt(a);
+  b = parseInt(b);
+  return (a + b).toFixed(2)
 }
 function minus(a, b) {
   return (a - b).toFixed(2);
@@ -33,6 +35,8 @@ function operate(a, operater, b) {
     int2 = 0;
     i++;
     swap = false
+    clearSwap = false;
+    clear.textContent = 'C';
     return(display(number1));
   }else if (operater == '-') {
     answer[i] = minus(a, b);
@@ -42,6 +46,8 @@ function operate(a, operater, b) {
     number2 = [];
     i++;
     swap = false
+    clearSwap = false;
+    clear.textContent = 'C';
     return(display(number1));
   }else if (operater == 'x') {
     answer[i] = times(a, b);
@@ -51,6 +57,8 @@ function operate(a, operater, b) {
     int2 = 0;
     i++;
     swap = false
+    clearSwap = false;
+    clear.textContent = 'C';
     return(display(number1));
   }else if (operater == '÷') {
     answer[i] = divided(a, b);
@@ -60,6 +68,8 @@ function operate(a, operater, b) {
     int2 = 0;
     i++;
     swap = false
+    clearSwap = false;
+    clear.textContent = 'C';
     return(display(number1));
   }
 }
@@ -69,7 +79,8 @@ function storeNumber(number){
   sub.style.backgroundColor = '#195190FF'
   div.style.backgroundColor = '#195190FF'
   mult.style.backgroundColor = '#195190FF'
-
+  clear.textContent = 'C'
+  clearSwap = false;
 
   if (swap == false){
     number1.push(number);
@@ -159,15 +170,38 @@ function multiplyOperator(operator) {
   op = operator; 
 }
 
-function Clear() { // will reset the Calculator
-  number1  = [];
-  number2 = [];
-  answer = [];
-  int1 = [];
-  int2 = [];
-  i = 0;
-  swap = false;
-  para.textContent = '0';
+function Clear(){
+  if (clearSwap == false){
+    if (swap == false){
+      clear.textContent = 'AC'
+      number1 = [];
+      int1 = [];
+      para.textContent = '0';
+      clearSwap = true;
+    }
+    else if (swap == true){
+      clear.textContent = 'AC'
+      number2 = [];
+      int2 = [];
+      para.textContent = '0';
+      clearSwap = true;
+    }
+  }
+  else if (clearSwap == true) {
+    allClear()
+  }
+}
+function allClear() { // will reset the Calculator
+    number1 = [];
+    number2 = [];
+    answer = [];
+    int1 = [];
+    int2 = [];
+    i = 0;
+    swap = false;
+    para.textContent = '0';
+    clearSwap = false;
+    clear.textContent = 'C';
 }
 
 function display(number) { // displays the numbers
@@ -242,6 +276,6 @@ problem 1: can enter multple negatives
 */
 
 /*
-qualit of life chagne: add a AC clear button 
-
+quality of life change: add a AC clear button 
+qoflc: make buttons change color slightly 
 */
