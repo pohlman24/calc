@@ -9,21 +9,44 @@ let wholeEquation;
 let num_of_decimals = 0, nums_of_negatives = 0;
 
 let plusMath = function plus(a, b) {
-  a = parseInt(a);
-  b = parseInt(b);
-  return (a + b).toFixed(2)
+  a = parseFloat(a);
+  b = parseFloat(b);
+
+  if (((a+b) % 1) != 0){
+    console.log('test number 20')
+    return (a + b).toFixed(2);
+  }
+  return (a + b);
 }
 function minus(a, b) {
-  return (a - b).toFixed(2);
+  if ((a - b) % 1 != 0) {
+    return (a - b).toFixed(2);
+  }
+  return (a - b);
 }
 function times(a, b) {
-  return (a * b).toFixed(2);
+  if ((a * b) % 1 != 0) {
+    return (a * b).toFixed(2);
+  }
+  return (a * b);
 }
 function divided(a, b) {
   if (b == 0){
     return("Infinity")
   }
-  return (a / b).toFixed(2);
+  else if ((a / b) % 1 != 0) {
+    return (a / b).toFixed(2);
+  }
+  return (a / b);
+}
+function powerOf(number){
+  if (swap == false){
+    a = int1; 
+  }
+  else if (swap == true){
+    a = int2;
+  }
+  return a**number
 }
 
 function operate(a, operater, b) {
@@ -71,6 +94,9 @@ function operate(a, operater, b) {
     clearSwap = false;
     clear.textContent = 'C';
     return(display(number1));
+  }
+  else if (operater == '^'){
+
   }
 }
 
@@ -120,7 +146,6 @@ function storeNumber(number){
       }
     }
     else{
-      console.log('display number test')
       display(int1)
       wholeEquation = int1
     }
@@ -167,6 +192,11 @@ function divideOperator(operator) {
 function multiplyOperator(operator) {
   swap = true;
   mult.style.backgroundColor = '#b5d8ff';
+  op = operator; 
+}
+function powerOperator(operator){
+  swap = true;
+  pow.style.backgroundColor = '#b5d8ff';
   op = operator; 
 }
 
