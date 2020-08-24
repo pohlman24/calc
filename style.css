@@ -29,7 +29,10 @@
   justify-content: center;
   background: #A2A2A1FF; /* silver */
   border: 1px solid black;
+}
 
+.number:hover {
+  background-color: rgb(131, 130, 130);
 }
 .oper {
   font-size: 3em;
@@ -38,8 +41,12 @@
   justify-content: center;
   background: #195190FF; /* dark blue */
   border: 1px solid black;
-
 }
+
+.oper:hover{
+  background-color: rgb(31, 100, 179)
+}
+
 #result {
   grid-column-start: 1;
   grid-column-end: 5;

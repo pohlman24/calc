@@ -306,6 +306,5 @@ problem 1: can enter multple negatives
 */
 
 /*
-quality of life change: add a AC clear button 
 qoflc: make buttons change color slightly 
 */
