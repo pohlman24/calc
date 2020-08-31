@@ -6,14 +6,13 @@ let op;
 let i = 0;
 let test = [];
 let wholeEquation;
-let num_of_decimals = 0, nums_of_negatives = 0;
+let num_of_decimals = 0, nums_of_negatives = 0, true_percent_op_counter = 0, false_percent_op_counter = 0;
 
 let plusMath = function plus(a, b) {
   a = parseFloat(a);
   b = parseFloat(b);
 
   if (((a+b) % 1) != 0){
-    console.log('test number 20')
     return (a + b).toFixed(2);
   }
   return (a + b);
@@ -39,14 +38,8 @@ function divided(a, b) {
   }
   return (a / b);
 }
-function powerOf(number){
-  if (swap == false){
-    a = int1; 
-  }
-  else if (swap == true){
-    a = int2;
-  }
-  return a**number
+function percentOp(number){
+  return number/100
 }
 
 function operate(a, operater, b) {
@@ -95,8 +88,18 @@ function operate(a, operater, b) {
     clear.textContent = 'C';
     return(display(number1));
   }
-  else if (operater == '^'){
-
+  else if (operater == '%'){
+    answer[i] = percentOp(int1)
+    number1 = []
+    number1.push(answer[i]);
+    int1 = answer[i];
+    number2 = [];
+    int2 = 0
+    i++;
+    swap = false;
+    clearSwap = false;
+    clear.textContent = 'C';
+    return (display(int1));
   }
 }
 
@@ -175,10 +178,7 @@ function addOperator(operator){
   swap = true;
   add.style.backgroundColor = '#b5d8ff';
   op = operator; 
-  test.push(operator);
-  wholeEquation += test
 }
-
 function minusOperator(operator) {
   swap = true;
   sub.style.backgroundColor = '#b5d8ff';
@@ -194,10 +194,25 @@ function multiplyOperator(operator) {
   mult.style.backgroundColor = '#b5d8ff';
   op = operator; 
 }
-function powerOperator(operator){
-  swap = true;
-  pow.style.backgroundColor = '#b5d8ff';
-  op = operator; 
+function percentOperator(operator){
+    op = operator;
+    if(swap == false){
+      true_percent_op_counter++;
+      if (true_percent_op_counter > 1){
+        return 0;
+      }
+      else{
+        operate(int1, op, null);
+      }
+    }
+    else if (swap == true){
+      false_percent_op_counter++;
+      if (false_percent_op_counter > 1){
+        return 0;
+      }else{
+        operate(int2, op, null);
+      }
+    }
 }
 
 function Clear(){
@@ -250,7 +265,7 @@ const one = document.querySelector('#one');
 const clear = document.querySelector('#clear');
 const neg = document.querySelector('#neg');
 const dot = document.querySelector('#dot');
-const pow = document.querySelector('#power');
+const percent = document.querySelector('#percent');
 const result = document.querySelector('#result');
 const para = document.createElement('p');
 para.textContent = '0'
@@ -261,7 +276,7 @@ const div = document.querySelector('#div');
 const equal = document.querySelector('#equal');
 result.appendChild(para);
 
-// buttons
+// Number buttons
 one.addEventListener('click', () => {return storeNumber('1');})
 two.addEventListener('click', () => {return storeNumber('2');});
 three.addEventListener('click', () => {return storeNumber('3');});
@@ -274,37 +289,22 @@ nine.addEventListener('click', () => {return storeNumber('9');});
 zero.addEventListener('click', () => {return storeNumber('0');});
 dot.addEventListener('click', () => {return storeNumber('.');});
 neg.addEventListener('click', () => { return storeNumber('-');});
-
+// Operator buttons
 add.addEventListener('click', () => {return addOperator('+');});
 sub.addEventListener('click', () => { return minusOperator('-');});
 div.addEventListener('click', () => { return divideOperator('÷');});
 mult.addEventListener('click', () => { return multiplyOperator('x');});
-pow.addEventListener('click', () => { return });
-
-
+percent.addEventListener('click', () => { return percentOperator('%'); });
+// Other buttons
 equal.addEventListener('click', () => { return operate(int1, op, int2);});
 clear.addEventListener('click', () => {return Clear();});
 
-
-
 /*
-  test_array = 2+5x1
-  maybe try to filter the array to get each operation type:
-  indexOfPlus = test_array.indexOf('+')
-  let a  = test_array[indexOfPlus-1]
-  let b = test_array[indexOfPlus+1]
-  plus(a,b)
-  test_array.indexOf() for '-'
-  test_array.indexOf() for 'X'
-  test_array.indexOf() for '/'
-
-
+problem 1: Percent operator Error When user tries to enter another number after doing percent operation
+problem 2: numbers will overflow off screen
 */
 
 /*
-problem 1: can enter multple negatives 
-*/
+qoflc:
 
-/*
-qoflc: make buttons change color slightly 
 */
