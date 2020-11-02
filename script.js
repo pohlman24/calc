@@ -3,7 +3,6 @@ let op = "";
 let equation = "";
 let equalPressed = true;
 let answer = "";
-let swap = false, clearSwap = false;
 
 function plus(a, b) {
   return (a + b);
@@ -46,8 +45,6 @@ function storeNumber(number) {
   sub.style.backgroundColor = '#195190FF'
   div.style.backgroundColor = '#195190FF'
   mult.style.backgroundColor = '#195190FF'
-  clear.textContent = 'C'
-  clearSwap = false;
 
   if (equation.length >= 9){
     number.removeEventListener("click", storeNumber);
@@ -58,19 +55,19 @@ function storeNumber(number) {
       equalPressed = false;
     }
     equation += number;
-    display(equation);
+    display(int1+op+equation);
   }
 }
 
 function storeOp(operator){
   if(op === ""){
-    int1 = +equation;
+    int1 =+ equation;
     equation = "";
-    display("");
+    display(int1 + "" + operator);
     op = operator;
   }
   else{
-    int1 = operate(int1, operator, +equation);
+    int1 = operate(int1, op, +equation);
     equation = "";
     display(int1);
     op = operator;
@@ -99,36 +96,13 @@ function evaluate() {
   }
 }
 
-function Clear(){
-  if (clearSwap == false){
-    if (swap == false){
-      clear.textContent = 'AC'
-      number1 = [];
-      int1 = [];
-      para.textContent = '0';
-      clearSwap = true;
-    }
-    else if (swap == true){
-      clear.textContent = 'AC'
-      number2 = [];
-      int2 = [];
-      para.textContent = '0';
-      clearSwap = true;
-    }
-  }
-  else if (clearSwap == true) {
-    allClear()
-  }
-}
 function allClear() { // will reset the Calculator
-    number1 = [];
-    number2 = [];
-    answer = [];
-    int1 = [];
-    int2 = [];
+    answer = 0;
+    int1 = "";
+    int2 = "";
+    equation = "";
+    equalPressed = true;
     para.textContent = '0';
-    clearSwap = false;
-    clear.textContent = 'C';
 }
 
 function display(number) { // displays the numbers
@@ -183,7 +157,7 @@ mult.addEventListener('click', () => { return storeOp('x')});
 percent.addEventListener('click', () => { return storeOp('%')});
 // Other buttons
 equal.addEventListener('click', () => {return evaluate()});
-clear.addEventListener('click', () => {return Clear()});
+clear.addEventListener('click', () => {return allClear()});
 /*
 deleteBtn.addEventListener('click', function() { 
   equation = equation.slice(0, -1);
