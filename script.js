@@ -103,6 +103,7 @@ function allClear() { // will reset the Calculator
     int1 = "";
     int2 = "";
     equation = "";
+    op = "";
     equalPressed = true;
     para.textContent = '0';
 }
