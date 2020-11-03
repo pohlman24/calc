@@ -16,8 +16,8 @@ function times(a, b) {
 function divided(a, b) {
   return (a / b);
 }
-function percentOp(number){
-  return number/100
+function percentOf(a, b){
+  return (a/100) * b;
 }
 
 function operate(int1, op, int2) {
@@ -35,7 +35,7 @@ function operate(int1, op, int2) {
     answer = divided(int1, int2);
   }
   else if(op === "%"){
-    answer = percentOp(int1, null);
+    answer = percentOf(int1, int2);
   }
   return answer;
 }
@@ -96,6 +96,8 @@ function evaluate() {
   }
 }
 
+
+
 function allClear() { // will reset the Calculator
     answer = 0;
     int1 = "";
@@ -126,7 +128,7 @@ const dot = document.querySelector('#dot');
 const percent = document.querySelector('#percent');
 const result = document.querySelector('#result');
 const para = document.createElement('p');
-const deleteBtn = document.querySelector("backArrow");
+const deleteBtn = document.querySelector("#backArrow");
 para.textContent = '0'
 // Operator const
 const add = document.querySelector('#add');
@@ -158,9 +160,8 @@ percent.addEventListener('click', () => { return storeOp('%')});
 // Other buttons
 equal.addEventListener('click', () => {return evaluate()});
 clear.addEventListener('click', () => {return allClear()});
-/*
+
 deleteBtn.addEventListener('click', function() { 
   equation = equation.slice(0, -1);
   para.textContent = equation;
 });
-*/
